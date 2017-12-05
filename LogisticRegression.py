@@ -117,6 +117,7 @@ def predict(w, b, X):
         # 将概率a[0，1]装换成p[0,1]
         if (A[0, i] > 0.5):
             Y_prediction[0][i] = 1
+
         else:
             Y_prediction[0][i] = 0
 
