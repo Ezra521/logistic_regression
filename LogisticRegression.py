@@ -4,14 +4,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 # import h5py
 import scipy
-# from PIL import Image
 from scipy import ndimage
 
 from lr_utils import load_dataset
 
 # 载入数据，HDF5文件类型，其中有两个。一个是训练集，一个是测试集 其中load_dataset()函数是从lr_utils.py中导入的
 train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
-
 
 #得到训练集和测试集的数量，以及num_px是图片的长和宽度，单位是像素点
 # 其中train_set_x_orig.shape  是 209 64 64 3
