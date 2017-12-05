@@ -1,3 +1,9 @@
+"""
+ author : Ezra Wu
+ Email:zgahwuqiankun@qq.com
+ Data:2017-12-1
+"""
+
 import time
 
 import matplotlib.pyplot as plt

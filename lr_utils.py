@@ -1,3 +1,8 @@
+"""
+ author : Ezra Wu
+ Email:zgahwuqiankun@qq.com
+"""
+
 import h5py
 import numpy as np
 
