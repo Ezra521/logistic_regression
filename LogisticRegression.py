@@ -110,11 +110,11 @@ def predict(w, b, X):
     Y_prediction = np.zeros((1, m))
     w = w.reshape(X.shape[0], 1)
 
-    # Compute vector "A" predicting the probabilities of a cat being present in the picture
+    # 计算向量A 预测猫出现在图片中的概率
     A = np.dot(w.T, X)
     for i in range(A.shape[1]):
 
-        # Convert probabilities a[0,i] to actual predictions p[0,i]
+        # 将概率a[0，1]装换成p[0,1]
         if (A[0, i] > 0.5):
             Y_prediction[0][i] = 1
         else:
