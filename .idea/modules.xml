@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../ch40/.idea/ch40.iml" filepath="$PROJECT_DIR$/../ch40/.idea/ch40.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/regression.iml" filepath="$PROJECT_DIR$/.idea/regression.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/logistic_regression.iml" filepath="$PROJECT_DIR$/.idea/logistic_regression.iml" />
     </modules>
   </component>
 </project>
