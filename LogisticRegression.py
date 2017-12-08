@@ -31,13 +31,33 @@ test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0], -1).T
 train_set_x = train_set_x_flatten / 255.  #将数据集中的每一行除以255（像素通道的最大值）
 test_set_x = test_set_x_flatten/255.
 
-#定义激活函数
+
+
 def sigmoid(z):
+    """
+        定义激活函数
+        入参：
+            z      ：任何大小的标量或numpy数组。
+       返回：
+          s      ：sigmoid（z）
+
+    """
     s = 1. / (1. + np.exp(-z))
     return s
 
-#将w和b初始化为0的函数
+
+
 def initialize_with_zeros(dim):
+    """
+      该函数为w创建一个形状为零（dim，1）的向量，并将b初始化为0。
+
+      入参:
+      dim       ：我们想要的w矢量的大小（或者这种情况下的参数数量）
+
+      返回值:
+      w         ：初始化向量为（dim,1）
+      b         ：初始化标量
+    """
     w = np.zeros((dim, 1))  #这里要注意w一定要是一个向量才行，不能直接等于0，那样的话就是一个浮点数
     b = 0
 
@@ -49,8 +69,20 @@ def initialize_with_zeros(dim):
 
 
 
-#正向传播和反向传播算法，计算sigmodi值，计算损失函数的数值
+
 def propagate(w, b, X, Y):
+    """
+    实现传播的成本函数及其梯度
+    入参：
+    w               :权重，numpy中的array数组大小是（num_px * num_px *3 , 1）
+    b               :偏移量，一个标量
+    X               :样本数据（num_px * num_px * 3 , m）m是样本的数量
+    Y               :样本的分类标签。0代表不是猫，1代表是猫（1 ，m ）m是样本的数量
+    返回值:
+    cost            ：Logistic回归的负对数似然成本
+    dw              ：损失相对于w的梯度，因此与w相同的形状
+    db              ：损失相对于b的梯度，因此与b相同的形状
+    """
     m = X.shape[1]
     # 正向传播计算cost 的数值
     A = sigmoid(np.dot(w.T, X) + b)  # 计算激活函数的值
@@ -67,11 +99,25 @@ def propagate(w, b, X, Y):
     return grads, cost
 
 
-w, b, X, Y = np.array([[1],[2]]), 2, np.array([[1,2],[3,4]]), np.array([[1,0]])
-grads, cost = propagate(w, b, X, Y)
-
-#优化算法
 def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
+    """
+        这个函数优化w和b通过梯度下降算法
+
+        入参：
+        w               :权重，numpy中的array数组大小是（num_px * num_px *3 , 1）
+        b               :偏移量，一个标量
+        X               :样本数据（num_px * num_px * 3 , m）m是样本的数量
+        Y               :样本的分类标签。0代表不是猫，1代表是猫（1 ，m ）m是样本的数量
+        num_iterations  :迭代的次数
+        learning_rate   :学习率（步长）
+        print_cost      :是否没100步打印一次
+
+        返回值：
+        params          :包含w和b的一个字典
+        grads,          :包含dw和db的字典
+        costs           :优化过程计算的成本，绘制学习曲线的时候会用到
+
+    """
     costs = []
     for i in range(num_iterations):
 
@@ -101,9 +147,18 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
     return params, grads, costs
 
 
-params, grads, costs = optimize(w, b, X, Y, num_iterations= 100, learning_rate = 0.009, print_cost = False)
-
 def predict(w, b, X):
+    """
+    使用学习逻辑回归参数（w，b）预测标签是0还是1，
+
+    入参：
+    w               :权重，numpy中的array数组大小是（num_px * num_px *3 , 1）
+    b               :偏移量，一个标量
+    X               :样本数据（num_px * num_px * 3 , m）m是样本的数量
+
+    返回值:
+    Y_prediction    ：包含所有预测（0/1）的numpy数组（向量），用于X中的示例
+    """
     m = X.shape[1]#获取x也就是样本的维度
     Y_prediction = np.zeros((1, m))
     w = w.reshape(X.shape[0], 1)
@@ -125,6 +180,21 @@ def predict(w, b, X):
 
 
 def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0.5, print_cost=False):
+    """
+        通过调用之前实现的函数来构建逻辑回归模型
+
+        入参:
+        X_train         ：由一个numpy数组表示的训练集 (num_px * num_px * 3, m_train)
+        Y_train         ：由一个numpy数组表示的训练标签 (vector) of shape (1, m_train)
+        X_test          ：由一个numpy数组表示的测试集 (num_px * num_px * 3, m_test)
+        Y_test          ：由一个numpy数组表示的测试标签 (vector) of shape (1, m_test)
+        num_iterations  :迭代的次数
+        learning_rate   :学习率（步长）
+        print_cost      :是否没100步打印一次
+
+        返回值:
+        d               ：包含关于模型的信息的字典。
+    """
 
     # 初始化函数，也就是把一些参数置零
     w, b = initialize_with_zeros(X_train.shape[0])
@@ -144,16 +214,17 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0
     print("训练集正确率: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
     print("测试集正确率: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
 
-    d = {"costs": costs,
+    d = {
+         "costs": costs,
          "Y_prediction_test": Y_prediction_test,
          "Y_prediction_train": Y_prediction_train,
          "w": w,
          "b": b,
          "learning_rate": learning_rate,
-         "num_iterations": num_iterations}
+         "num_iterations": num_iterations
+         }
 
     return d
-
 
 tic = time.process_time()
 num_iterations = 5000
