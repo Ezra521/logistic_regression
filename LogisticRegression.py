@@ -24,8 +24,7 @@ m_test = test_set_x_orig.shape[0]  # 这个是测试样本的数量  此程序�
 num_px = train_set_x_orig.shape[1]  # 这个是每个图片的像素点
 
 #将图像原本是[64,64,3]的列表变成[64*64*3，1]
-train_set_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[0],
-                                               -1).T  #这里用了reshape()函数-1就是我们不知道train_set_x_orig的列数
+train_set_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[0], -1).T  #这里用了reshape()函数，参数-1就是我们不知道train_set_x_orig的列数
 test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0], -1).T
 
 #将数据进行标准化，也就是说，平均一下。
@@ -42,7 +41,7 @@ def initialize_with_zeros(dim):
     w = np.zeros((dim, 1))  #这里要注意w一定要是一个向量才行，不能直接等于0，那样的话就是一个浮点数
     b = 0
 
-    #确保w是一个列向量，并且维度是确定，确保b是float或者int
+    #断言确保w是一个列向量，并且维度是确定，确保b是float或者int
     assert (w.shape == (dim, 1))
     assert (isinstance(b, float) or isinstance(b, int))
 
@@ -105,7 +104,7 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
 params, grads, costs = optimize(w, b, X, Y, num_iterations= 100, learning_rate = 0.009, print_cost = False)
 
 def predict(w, b, X):
-    m = X.shape[1]#获取x也就是样本的纬度
+    m = X.shape[1]#获取x也就是样本的维度
     Y_prediction = np.zeros((1, m))
     w = w.reshape(X.shape[0], 1)
 
@@ -130,7 +129,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0
     # 初始化函数，也就是把一些参数置零
     w, b = initialize_with_zeros(X_train.shape[0])
 
-    # 梯度下降
+    # 梯度下降w和b以字典的形式返回
     parameters, grads, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost=False)
 
     # 从字典参数中检索w和b
@@ -142,8 +141,8 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0
     Y_prediction_train = predict(w, b, X_train)
 
     # 打印训练和测试集的正确率
-    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
-    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+    print("训练集正确率: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
+    print("测试集正确率: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
 
     d = {"costs": costs,
          "Y_prediction_test": Y_prediction_test,
@@ -160,8 +159,8 @@ tic = time.process_time()
 num_iterations = 5000
 d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = num_iterations, learning_rate = 0.005, print_cost = True)
 toc = time.process_time()
-print('Use num_iterations of %i, run %f sec ' %(num_iterations, toc - tic))
-
+print('梯度下降迭代了%i次, 运行了%f秒 ' % (num_iterations, toc - tic))
+print ('\n' + "-------------------------------------------------------" + '\n')
 
 costs = np.squeeze(d['costs'])
 plt.plot(costs)
@@ -174,7 +173,7 @@ plt.show()
 learning_rates = [0.01, 0.001, 0.0001]
 models = {}
 for i in learning_rates:
-    print ("learning rate is: " + str(i))
+    print ("学习率（步长）α是: " + str(i))
     models[str(i)] = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 1500, learning_rate = i, print_cost = False)
     print ('\n' + "-------------------------------------------------------" + '\n')
 
