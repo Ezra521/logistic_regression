@@ -31,8 +31,6 @@ test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0], -1).T
 train_set_x = train_set_x_flatten / 255.  #将数据集中的每一行除以255（像素通道的最大值）
 test_set_x = test_set_x_flatten/255.
 
-
-
 def sigmoid(z):
     """
         定义激活函数
@@ -44,8 +42,6 @@ def sigmoid(z):
     """
     s = 1. / (1. + np.exp(-z))
     return s
-
-
 
 def initialize_with_zeros(dim):
     """
@@ -66,9 +62,6 @@ def initialize_with_zeros(dim):
     assert (isinstance(b, float) or isinstance(b, int))
 
     return w, b
-
-
-
 
 def propagate(w, b, X, Y):
     """
@@ -98,7 +91,6 @@ def propagate(w, b, X, Y):
              "db": db}
     return grads, cost
 
-
 def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
     """
         这个函数优化w和b通过梯度下降算法
@@ -121,23 +113,23 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
     costs = []
     for i in range(num_iterations):
 
-        # Cost and gradient calculation (≈ 1-4 lines of code)
+        # 成本和梯度的计算
         grads, cost = propagate(w, b, X, Y)
-        # Retrieve derivatives from grads
+        # 从返回的梯度字典中的到对w和b的偏导
         dw = grads["dw"]
         db = grads["db"]
 
-        # update rule (≈ 2 lines of code)
+        # 更新w和b的数值
         w = w - learning_rate * dw
         b = b - learning_rate * db
 
-        # Record the costs
+        # 记录成本
         if i % 100 == 0:
             costs.append(cost)
 
-        # Print the cost every 100 training examples
+        # 每一百步打印成本
         if print_cost and i % 100 == 0:
-            print("Cost after iteration %i: %f" % (i, cost))
+            print("迭代 %i次后的成本是: %f" % (i, cost))
 
     params = {"w": w,
               "b": b}
@@ -145,7 +137,6 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
              "db": db}
 
     return params, grads, costs
-
 
 def predict(w, b, X):
     """
@@ -170,12 +161,10 @@ def predict(w, b, X):
         # 将概率a[0，1]装换成p[0,1]
         if (A[0, i] > 0.5):
             Y_prediction[0][i] = 1
-
         else:
             Y_prediction[0][i] = 0
 
     assert (Y_prediction.shape == (1, m))
-
     return Y_prediction
 
 
@@ -200,13 +189,13 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0
     w, b = initialize_with_zeros(X_train.shape[0])
 
     # 梯度下降w和b以字典的形式返回
-    parameters, grads, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost=False)
+    parameters, grads, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost=True)
 
     # 从字典参数中检索w和b
     w = parameters["w"]
     b = parameters["b"]
 
-    # 预测训练和测试集的列子
+    # 预测训练和测试集的列子，预测也就是计算，就是所谓的正向传播
     Y_prediction_test = predict(w, b, X_test)
     Y_prediction_train = predict(w, b, X_train)
 
