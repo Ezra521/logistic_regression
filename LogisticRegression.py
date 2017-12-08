@@ -226,8 +226,9 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0
 
     return d
 
+
 tic = time.process_time()
-num_iterations = 5000
+num_iterations = 5000  #迭代次数
 d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = num_iterations, learning_rate = 0.005, print_cost = True)
 toc = time.process_time()
 print('梯度下降迭代了%i次, 运行了%f秒 ' % (num_iterations, toc - tic))

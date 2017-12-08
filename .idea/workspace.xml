@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="182b44de-627d-42e9-a109-1819b30ced39" name="Default" comment="">
+    <list default="true" id="182b44de-627d-42e9-a109-1819b30ced39" name="Default" comment="打了更多的汉语注释，减少理解的难度">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/LogisticRegression.py" afterPath="$PROJECT_DIR$/LogisticRegression.py" />
     </list>
@@ -17,8 +17,8 @@
       <file leaf-file-name="LogisticRegression.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LogisticRegression.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="227" column="0" lean-forward="true" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+            <state relative-caret-position="194">
+              <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
               <folding>
                 <element signature="e#71#82#0" expanded="true" />
               </folding>
@@ -186,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512717767334</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="打了更多的汉语注释，减少理解的难度">
+      <created>1512720814267</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1512720814267</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -338,8 +345,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LogisticRegression.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="227" column="0" lean-forward="true" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+        <state relative-caret-position="194">
+          <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
           <folding>
             <element signature="e#71#82#0" expanded="true" />
           </folding>
