@@ -51,6 +51,13 @@ def load_dataset():
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 load_dataset()
 # train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
+#
+# print('train_set_y:' + str(train_set_y))
+# print(train_set_x_orig)
+#
+# print(train_set_x_orig.shape)
+#
+#
 # print('test_set_y:' + str(test_set_y))
 # print(test_set_x_orig)
 #

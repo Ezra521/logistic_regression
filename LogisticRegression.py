@@ -5,7 +5,6 @@
 """
 
 import time
-
 import matplotlib.pyplot as plt
 import numpy as np
 # import h5py
@@ -106,7 +105,7 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
 params, grads, costs = optimize(w, b, X, Y, num_iterations= 100, learning_rate = 0.009, print_cost = False)
 
 def predict(w, b, X):
-    m = X.shape[1]
+    m = X.shape[1]#获取x也就是样本的纬度
     Y_prediction = np.zeros((1, m))
     w = w.reshape(X.shape[0], 1)
 
@@ -128,20 +127,21 @@ def predict(w, b, X):
 
 def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0.5, print_cost=False):
 
-    # initialize parameters with zeros (≈ 1 line of code)
+    # 初始化函数，也就是把一些参数置零
     w, b = initialize_with_zeros(X_train.shape[0])
-    # Gradient descent (≈ 1 line of code)
+
+    # 梯度下降
     parameters, grads, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost=False)
 
-    # Retrieve parameters w and b from dictionary "parameters"
+    # 从字典参数中检索w和b
     w = parameters["w"]
     b = parameters["b"]
 
-    # Predict test/train set examples (≈ 2 lines of code)
+    # 预测训练和测试集的列子
     Y_prediction_test = predict(w, b, X_test)
     Y_prediction_train = predict(w, b, X_train)
 
-    # Print train/test Errors
+    # 打印训练和测试集的正确率
     print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
     print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
 
