@@ -111,6 +111,9 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
 
     """
     costs = []
+
+
+    #通过迭代次数作为停机条件
     for i in range(num_iterations):
 
         # 成本和梯度的计算
@@ -130,6 +133,30 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
         # 每一百步打印成本
         if print_cost and i % 100 == 0:
             print("迭代 %i次后的成本是: %f" % (i, cost))
+
+    """
+    #使用成本小于阈值作为停机条件的代码
+    while True:
+        # 成本和梯度的计算
+        grads, cost = propagate(w, b, X, Y)
+        # 从返回的梯度字典中的到对w和b的偏导
+        dw = grads["dw"]
+        db = grads["db"]
+
+        # 更新w和b的数值
+        w = w - learning_rate * dw
+        b = b - learning_rate * db
+
+        # 记录成本
+
+        costs.append(cost)
+
+        # 打印迭代的成本
+        if print_cost :
+            print("迭代 后的成本是: %f" % ( cost))
+        if cost < 0.09:
+            break
+    """
 
     params = {"w": w,
               "b": b}
@@ -239,7 +266,7 @@ for i in learning_rates:
     print ('\n' + "-------------------------------------------------------" + '\n')
 
 for i in learning_rates:
-    plt.plot(np.squeeze(models[str(i)]["costs"]), label= str(models[str(i)]["learning_rate"]))
+    plt.plot(np.squeeze(models[str(i)]["costs"]), label = str(models[str(i)]["learning_rate"]))
 
 plt.ylabel('cost')
 plt.xlabel('iterations')
@@ -250,7 +277,7 @@ frame.set_facecolor('0.90')
 plt.show()
 
 
-my_image = "./w2.jpg"
+my_image = "./wqk2.jpg"
 
 # 预处理自己的图片适应上面的逻辑回归算法
 fname = "images/" + my_image
